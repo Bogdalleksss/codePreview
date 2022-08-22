@@ -1,20 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { getBaseUrl } from "utils/api";
+import { IUser } from 'types'
 
-interface VerifyBody {
+
+interface IVerifyBody {
   verify_id: string;
   verify_code: number;
-}
-
-interface User {
-  _id?: string;
-  phone: string;
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  username: string;
-  // Остальные данные скрыты
 }
 
 export const authApi = createApi({
@@ -30,15 +21,15 @@ export const authApi = createApi({
         body: { email }
       }),
     }),
-    confirmEmail: build.mutation<any, VerifyBody>({
-      query: (body: VerifyBody) => ({
+    confirmEmail: build.mutation<any, IVerifyBody>({
+      query: (body: IVerifyBody) => ({
         url: '/confirm-code',
         method: 'POST',
         body,
       }),
     }),
-    signUp: build.mutation<any, User>({
-      query: (body: User) => ({
+    signUp: build.mutation<any, IUser>({
+      query: (body: IUser) => ({
         url: '/signup',
         method: 'POST',
         body,
